@@ -37,6 +37,9 @@ public class User {
 	 */
 	protected typeConnect etat; 
 	
+	/**
+	 * List of the message associated to a user
+	 */
 	private MessageListModel msglist;
 	
 	public User(String pseudo, InetAddress iP, int port, typeConnect etat) {
@@ -100,6 +103,8 @@ public class User {
 		this.msglist.addmessage(msg);
 	}
 	
-
+	public void displaymessage(){
+		System.out.println(this.msglist);
+	}
 	
 }

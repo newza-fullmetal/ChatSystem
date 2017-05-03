@@ -34,6 +34,7 @@ public class UserListModel {
 			}
 		
 		if (!alreadyexist){
+			System.out.println("new presence : " + user.getPseudo());
 			this.userlist.put(user.getPseudo(),user);
 			this.listmodeluser.addElement(user);
 			System.out.println(this.listmodeluser);
@@ -50,6 +51,7 @@ public class UserListModel {
 	 */
 	public void removeuser(User user){
 		if (this.userlist.containsValue(user)){
+				System.out.println("new leave : " + user.getPseudo());
 				this.userlist.remove(user);
 				this.listmodeluser.removeElement(user);
 			}

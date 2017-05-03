@@ -39,7 +39,8 @@ public class SendMessage {
 				oos.flush();
 				oos.close();
 				socket.close();
-				System.out.println("dest : " + user.getIP() + user.getPort() + this.datatosend);
+				System.out.println("Envoie de message vers : " + user.getIP() + user.getPort() + "\n" +
+									"Contenu :" + this.datatosend);
 			}
 		
 

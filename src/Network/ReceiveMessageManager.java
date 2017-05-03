@@ -23,7 +23,6 @@ public class ReceiveMessageManager extends Thread{
 		System.out.println("Thread receptionMessage Start");
 		while (!Thread.currentThread().isInterrupted()) {
 			try{
-				System.out.println("plop");
 				ServerSocket socketserver  ;
 		        Socket socketduserveur ;
 		        socketserver = new ServerSocket( LocalUser.getInstance().getPort());
@@ -35,7 +34,7 @@ public class ReceiveMessageManager extends Thread{
 				if (socketduserveur.getInetAddress() != null) {
 					this.controller.Newincomingmessage(msg, socketduserveur.getInetAddress());
 				}
-				 System.out.println(msg.getData());
+				 System.out.println("New incoming message :" + ((msg.getData()==null)?"C'est un fichier":msg.getData())); // null if file
 				 socketserver.close();
 	             socketduserveur.close();
 			}

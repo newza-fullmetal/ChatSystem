@@ -73,6 +73,7 @@ public class ConnectionIHM extends JFrame {
 	private void shut() {
 		this.dispose();
 		LocalUser.getInstance().setConnected();
+		
 	}
 	
 	

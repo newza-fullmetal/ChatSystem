@@ -114,9 +114,11 @@ public class NetworkInteractionController {
 	public void userpresenceevent(MessageUser msg){
 		User user = new User(msg.getPseudo(), msg.getIP(), msg.getPort(), msg.getEtat());
 		if (msg.getEtat() == typeConnect.CONNECTED || msg.getEtat() ==null ){
+			
 			this.Userlist.adduser(user);
 		}
 		else {
+			
 			this.Userlist.removeuser(user);
 		}
 	}
@@ -129,13 +131,14 @@ public class NetworkInteractionController {
 	public void Newincomingmessage(Message msg, InetAddress remoteIP){
 		if (!msg.isFile()){
 			if (msg.getData() != null ){
-				Set cles = this.Userlist.getuserlist().keySet();
-				Iterator it = cles.iterator();
+				Set<String> cles = this.Userlist.getuserlist().keySet();
+				Iterator<String> it = cles.iterator();
 				while (it.hasNext()){
 					Object cle = it.next();
 					User user =  this.Userlist.getuserlist().get(cle); 
-					if (user.getIP() == remoteIP){
+					if (user.getIP().getHostAddress() == remoteIP.getHostAddress()){
 						user.addmessage(msg);
+						user.displaymessage();
 					}
 				}
 			}
@@ -154,6 +157,11 @@ public class NetworkInteractionController {
 		}
 	}
 	
+	/**
+	 * Function to disconnect when leaving 
+	 * Set the Local user to disconnected and let time to send a message to the unicast group
+	 * Kill the network thread and then the main Thread
+	 */
 	public void disconnect(){
 		LocalUser.getInstance().setDisconnected();
 		try { // Some time to send the message

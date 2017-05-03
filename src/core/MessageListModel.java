@@ -33,4 +33,13 @@ public class MessageListModel implements ListModel{
 		this.listlistener.remove(arg0);
 		
 	}
+	
+	public String toString(){
+		String historic ="";
+		for (Message msg : this.messagelist) {
+			historic += msg.toString();
+			historic +="\n ";
+		}
+		return historic;
+	}
 }

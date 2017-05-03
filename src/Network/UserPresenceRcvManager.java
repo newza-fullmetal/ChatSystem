@@ -34,7 +34,6 @@ public class UserPresenceRcvManager extends Thread{
 		        ByteArrayInputStream byteStream = new ByteArrayInputStream(recvBuf);
 		        ObjectInputStream is = new ObjectInputStream(new BufferedInputStream(byteStream));
 		        MessageUser msguser = (MessageUser)is.readObject();
-		        System.out.println("new presence : " + msguser.getPseudo() + msguser.getEtat());
 		        this.controller.userpresenceevent(msguser);
 		        is.close();
 		    }

@@ -50,4 +50,8 @@ public class Message implements Serializable {
 		if(ob instanceof File)
 			isFile = true;
 	}	
+	
+	public String toString(){
+		return this.data;
+	}
 }

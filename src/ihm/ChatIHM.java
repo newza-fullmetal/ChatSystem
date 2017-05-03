@@ -48,10 +48,10 @@ public class ChatIHM extends JFrame{
 			});
 		
 			setTitle("Chat");
-			setAlwaysOnTop(true);
+			setAlwaysOnTop(false);
 			
 			
-			setSize(new Dimension(900, 600));
+			setSize(new Dimension(1200, 900));
 			getContentPane().setLayout(new GridLayout(1, 0, 0, 0));
 			
 			
@@ -116,6 +116,7 @@ public class ChatIHM extends JFrame{
 		
 		
 		private void targetselected(){
+			System.out.println("User selected " + this.listuser.getSelectedValue());
 			System.out.println(this.listuser.getSelectedValuesList());
 		
 		}
@@ -124,8 +125,9 @@ public class ChatIHM extends JFrame{
 		 * Send the text written in the text area
 		 */
 		private void actionsendtxt(){
-			User user = (User)this.listuser.getSelectedValue();
-			if (user != null) {
+			
+			if (this.listuser.getSelectedValue() != null) {
+				User user = (User)this.listuser.getSelectedValue();
 				this.controller.actionsend(user,this.msg2send.getText() );
 			}
 			else{
@@ -157,7 +159,7 @@ public class ChatIHM extends JFrame{
 		
 		private void actionquit(){
 			this.dispose();
-			
+			this.controller.actiondisconnect();
 		}
 		
 		
