@@ -51,8 +51,8 @@ public class ChatIHM extends JFrame{
 			setAlwaysOnTop(false);
 			
 			
-			setSize(new Dimension(1200, 900));
-			getContentPane().setLayout(new GridLayout(1, 0, 0, 0));
+			setSize(new Dimension(900, 600));
+			getContentPane().setLayout(new GridLayout(1, 2, 0, 0));
 			
 			
 			
@@ -61,8 +61,6 @@ public class ChatIHM extends JFrame{
 			     this.listuser.setCellRenderer(new label());
 				listuser.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 				listuser.setLayoutOrientation(JList.VERTICAL);
-				JScrollPane listScroller = new JScrollPane(listuser);
-				listScroller.setPreferredSize(new Dimension(150, 800));
 				
 				listuser.addListSelectionListener(new ListSelectionListener() {
 					public void valueChanged(ListSelectionEvent arg0) {

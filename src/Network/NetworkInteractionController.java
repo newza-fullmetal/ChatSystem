@@ -136,7 +136,7 @@ public class NetworkInteractionController {
 				while (it.hasNext()){
 					Object cle = it.next();
 					User user =  this.Userlist.getuserlist().get(cle); 
-					if (user.getIP().getHostAddress() == remoteIP.getHostAddress()){
+					if (user.getIP().getHostAddress().equals(remoteIP.getHostAddress())){
 						user.addmessage(msg);
 						user.displaymessage();
 					}

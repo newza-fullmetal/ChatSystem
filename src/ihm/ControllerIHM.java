@@ -46,7 +46,7 @@ public class ControllerIHM{
 	}
 	
 	/**
-	 * 
+	 * Open the first frame where we choose our name
 	 */
 	public void Connection (){
 		ConnectionIHM connectionframe = new ConnectionIHM(this); 
@@ -57,9 +57,13 @@ public class ControllerIHM{
 		
 	}
 	
-	public void openchat(UserListModel userli){
-		ChatIHM chatframe = new ChatIHM(this, userli);
-		chatframe.pack();
+	/**
+	 * Open the mainwindow of the chat
+	 * @param userlist: UserListModel; The moving userlist
+	 */
+	public void openchat(UserListModel userlist){
+		ChatIHM chatframe = new ChatIHM(this, userlist);
+//		chatframe.pack();
 		chatframe.setLocationRelativeTo(null);
 		chatframe.setVisible(true);
 	}
