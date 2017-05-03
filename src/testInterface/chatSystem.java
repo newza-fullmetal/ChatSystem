@@ -10,10 +10,8 @@ import user.MessageUser;
  */
 public class chatSystem {
 
-    private String pseudo;
     
-    public chatSystem(String pseudo) {
-        this.pseudo = pseudo;
+    public chatSystem() {
     }
 
     /**

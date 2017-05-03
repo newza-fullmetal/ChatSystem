@@ -12,10 +12,8 @@ import core.UserListModel;
 
 public class ControllerIHM{
 	
-	private UserListModel userlist;
 	private NetworkInteractionController netcontroller;
 	public ControllerIHM(NetworkInteractionController controller) {	
-		this.userlist = new UserListModel();
 		this.netcontroller = controller;
 	}
 

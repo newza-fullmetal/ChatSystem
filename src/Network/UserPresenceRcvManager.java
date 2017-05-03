@@ -30,7 +30,6 @@ public class UserPresenceRcvManager extends Thread{
 		    DatagramPacket packet = new DatagramPacket(recvBuf, recvBuf.length);
 		    try{
 		    	this.controller.G_MultiSocket.receive(packet);
-		    	int byteCount = packet.getLength();
 		        ByteArrayInputStream byteStream = new ByteArrayInputStream(recvBuf);
 		        ObjectInputStream is = new ObjectInputStream(new BufferedInputStream(byteStream));
 		        MessageUser msguser = (MessageUser)is.readObject();
