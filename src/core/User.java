@@ -107,4 +107,11 @@ public class User {
 		System.out.println(this.msglist);
 	}
 	
+	/**
+	 * Getter of the message list
+	 * @return msglist;
+	 */
+	public MessageListModel getMsgList(){
+		return this.msglist;
+	}
 }

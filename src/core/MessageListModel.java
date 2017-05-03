@@ -3,6 +3,7 @@ package core;
 import java.util.ArrayList;
 
 import javax.swing.ListModel;
+import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListDataListener;
 
 import message.Message;
@@ -14,6 +15,9 @@ public class MessageListModel implements ListModel{
 	
 	public void addmessage(Message msg){
 		this.messagelist.add(msg);
+		for (ListDataListener l : this.listlistener){
+			l.contentsChanged(new ListDataEvent(msg, 0, 0, this.messagelist.indexOf(msg)));
+		}
 	}
 	@Override
 	public void addListDataListener(ListDataListener arg0) {

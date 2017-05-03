@@ -19,15 +19,18 @@ import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import core.MessageListModel;
+import java.util.List;
+
 import core.User;
 import core.UserListModel;
+import message.Message;
 
 public class ChatIHM extends JFrame{
 		private ControllerIHM controller;
 		private UserListModel userlist;
 		private JList<User> listuser;
 		private TextArea msg2send;
+		private JList<Message> msglist = new JList<>();
 
 		
 		public ChatIHM(ControllerIHM control, UserListModel userlist){
@@ -58,7 +61,7 @@ public class ChatIHM extends JFrame{
 				
 				listuser.addListSelectionListener(new ListSelectionListener() {
 					public void valueChanged(ListSelectionEvent arg0) {
-						targetselected();
+							refreshlist(targetselected());
 					}
 				});
 				getContentPane().add(listuser);
@@ -67,8 +70,7 @@ public class ChatIHM extends JFrame{
 				verticalBox.setForeground(Color.DARK_GRAY);
 				getContentPane().add(verticalBox);
 				
-				JList msglist = new JList();
-				verticalBox.add(msglist);
+				verticalBox.add(this.msglist);
 				msglist.setSize(new Dimension(350, 100));
 				msglist.setName("msglist");
 				msglist.setSelectionMode(NORMAL);
@@ -107,10 +109,10 @@ public class ChatIHM extends JFrame{
 			
 		
 		
-		private void targetselected(){
+		private List<User> targetselected(){
 			System.out.println("User selected " + this.listuser.getSelectedValue());
 			System.out.println(this.listuser.getSelectedValuesList());
-		
+			return this.listuser.getSelectedValuesList();
 		}
 		
 		/**
@@ -152,6 +154,13 @@ public class ChatIHM extends JFrame{
 		private void actionquit(){
 			this.dispose();
 			this.controller.actiondisconnect();
+		}
+		
+		private void refreshlist(List<User> targetlist){
+			if (!targetlist.isEmpty()){
+				this.msglist = new JList<Message>(targetlist.get(0).getMsgList());
+			}
+		
 		}
 		
 		
