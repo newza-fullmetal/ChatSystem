@@ -8,7 +8,7 @@ import javax.swing.event.ListDataListener;
 
 import message.Message;
 
-public class MessageListModel implements ListModel{
+public class MessageListModel implements ListModel<Message>{
 	private ArrayList<Message> messagelist = new ArrayList<Message>();
 	private ArrayList<ListDataListener> listlistener = new ArrayList<ListDataListener>();
 	
@@ -25,7 +25,7 @@ public class MessageListModel implements ListModel{
 		
 	}
 	@Override
-	public Object getElementAt(int arg0) {
+	public Message getElementAt(int arg0) {
 		return this.messagelist.get(arg0);
 	}
 	@Override

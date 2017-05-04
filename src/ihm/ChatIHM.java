@@ -9,6 +9,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -19,19 +21,24 @@ import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import java.util.List;
-
+import core.LocalUser;
 import core.User;
 import core.UserListModel;
 import message.Message;
+import user.MessageUser.typeConnect;
 
 public class ChatIHM extends JFrame{
+		/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3177011309003249264L;
+	
 		private ControllerIHM controller;
 		private UserListModel userlist;
 		private JList<User> listuser;
 		private TextArea msg2send;
 		private JList<Message> msglist = new JList<>();
-
+		private JButton btnDecoReco;
 		
 		public ChatIHM(ControllerIHM control, UserListModel userlist){
 			this.controller = control;
@@ -82,6 +89,7 @@ public class ChatIHM extends JFrame{
 				verticalBox.add(msg2send);
 				
 				Box horizontalBox = Box.createHorizontalBox();
+				horizontalBox.setAlignmentY(Component.CENTER_ALIGNMENT);
 				horizontalBox.setPreferredSize(new Dimension(0, 10));
 				horizontalBox.setSize(new Dimension(0, 40));
 				verticalBox.add(horizontalBox);
@@ -104,6 +112,21 @@ public class ChatIHM extends JFrame{
 					}
 				});
 				horizontalBox.add(btnAddFile);
+				
+				this.btnDecoReco = new JButton("Disconnect");
+				btnDecoReco.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						if (LocalUser.getInstance().getEtat() == typeConnect.CONNECTED){
+							actiondisconnect();
+						}
+						else if(LocalUser.getInstance().getEtat() == typeConnect.DECONNECTED) {
+							actionconnect();
+							
+						}	
+					}
+				});
+				btnDecoReco.setAlignmentX(Component.CENTER_ALIGNMENT);
+				verticalBox.add(btnDecoReco);
 			}
 
 			
@@ -111,7 +134,6 @@ public class ChatIHM extends JFrame{
 		
 		private List<User> targetselected(){
 			System.out.println("User selected " + this.listuser.getSelectedValue());
-			System.out.println(this.listuser.getSelectedValuesList());
 			return this.listuser.getSelectedValuesList();
 		}
 		
@@ -121,8 +143,9 @@ public class ChatIHM extends JFrame{
 		private void actionsendtxt(){
 			
 			if (this.listuser.getSelectedValue() != null) {
-				User user = (User)this.listuser.getSelectedValue();
-				this.controller.actionsend(user,this.msg2send.getText() );
+				ArrayList<User> targets = new ArrayList<User>();
+				targets.addAll(this.listuser.getSelectedValuesList());
+				this.controller.actionsend(targets,this.msg2send.getText() );
 			}
 			else{
 				JOptionPane.showMessageDialog(null,
@@ -140,7 +163,9 @@ public class ChatIHM extends JFrame{
 			User user = (User)this.listuser.getSelectedValue();
 			if (user != null) {
 				filepath = this.controller.openSendfileIHM();
-				this.controller.actionsendfile(user,filepath );
+				ArrayList<User> targets = new ArrayList<User>();
+				targets.addAll(this.listuser.getSelectedValuesList());
+				this.controller.actionsendfile(targets,filepath );
 			}
 			else{
 				JOptionPane.showMessageDialog(null,
@@ -151,8 +176,13 @@ public class ChatIHM extends JFrame{
 			
 		}
 		
+		
 		private void actionquit(){
 			this.dispose();
+			this.controller.actionquit();
+		}
+		private void actiondisconnect(){
+			this.btnDecoReco.setText("connect");
 			this.controller.actiondisconnect();
 		}
 		
@@ -161,6 +191,10 @@ public class ChatIHM extends JFrame{
 				this.msglist = new JList<Message>(targetlist.get(0).getMsgList());
 			}
 		
+		}
+		private void actionconnect(){
+			this.btnDecoReco.setText("Disconnect");
+			this.controller.actionconnect();
 		}
 		
 		

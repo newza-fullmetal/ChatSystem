@@ -32,7 +32,12 @@ public class UserPresenceRcvManager extends Thread{
 		    	this.controller.G_MultiSocket.receive(packet);
 		        ByteArrayInputStream byteStream = new ByteArrayInputStream(recvBuf);
 		        ObjectInputStream is = new ObjectInputStream(new BufferedInputStream(byteStream));
+		        
 		        MessageUser msguser = (MessageUser)is.readObject();
+		        /**
+		         * Debug
+		         * System.out.println("NEW MESSAGE RECEIVED : " + msguser.toString());
+		         */
 		        this.controller.userpresenceevent(msguser);
 		        is.close();
 		    }

@@ -7,9 +7,11 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;
 
+import core.User;
+
 
 public class label extends JLabel 
-    implements ListCellRenderer {
+    implements ListCellRenderer<User> {
 
   /**
 	 * 
@@ -19,8 +21,8 @@ Color selectCouleur = Color.RED;
   public  label(){
 
   }
-  public Component getListCellRendererComponent(JList list, 
-       Object value, // valeur à afficher
+  public Component getListCellRendererComponent(JList<?extends User> list, 
+       User value, // valeur à afficher
        int index, // indice d'item
        boolean isSelected, // l'item est-il sélectionné
        boolean cellHasFocus) // La liste a-t-elle le focus
@@ -40,5 +42,7 @@ Color selectCouleur = Color.RED;
      setOpaque(true);
      return this;
   }
+
 }
+
 

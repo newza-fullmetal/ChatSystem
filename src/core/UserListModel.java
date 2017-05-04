@@ -34,10 +34,12 @@ public class UserListModel {
 			}
 		
 		if (!alreadyexist){
-			System.out.println("new presence : " + user.getPseudo());
+			System.out.println("NEW COME : " + user.getPseudo());
 			this.userlist.put(user.getPseudo(),user);
 			this.listmodeluser.addElement(user);
 			System.out.println(this.listmodeluser);
+//			//DEBUG
+//			System.out.println("Table des users : " + this.listmodeluser);
 			
 		}
 		
@@ -50,10 +52,14 @@ public class UserListModel {
 	 * @param user : User; @see user
 	 */
 	public void removeuser(User user){
-		if (this.userlist.containsValue(user)){
-				System.out.println("new leave : " + user.getPseudo());
-				this.userlist.remove(user);
-				this.listmodeluser.removeElement(user);
+		if (this.userlist.containsKey(user.getPseudo())){
+				User olduser = this.userlist.get(user.getPseudo());
+				System.out.println("NEW LEAVE : " + olduser.getPseudo());
+				this.userlist.remove(olduser.getPseudo(), olduser);
+				this.listmodeluser.removeElement(olduser);
+//				//DEBUG
+//				System.out.println("Table des users : " + this.userlist);
+				
 			}
 		
 	}

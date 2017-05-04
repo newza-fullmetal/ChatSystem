@@ -41,6 +41,10 @@ public class UserPresenceSendManager extends Thread{
 			DatagramPacket hi = new DatagramPacket(bytearray.toByteArray(), bytearray.size(),
                     controller.group, 6789);
 			controller.G_MultiSocket.send(hi);
+			/**
+			 * Debug
+			 * System.out.println("MESSAGE SENT : " + this.messagepresence.toString());
+			 */
 		}
 		catch (IOException e){
 			JOptionPane.showMessageDialog(null,

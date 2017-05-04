@@ -8,18 +8,19 @@ import java.net.InetAddress;
 import java.net.MulticastSocket;
 import java.net.SocketException;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Set;
 
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
-import message.Message;
-import user.MessageUser;
-import user.MessageUser.typeConnect;
 import core.LocalUser;
 import core.User;
 import core.UserListModel;
+import message.Message;
+import user.MessageUser;
+import user.MessageUser.typeConnect;
 
 
 /**
@@ -92,27 +93,44 @@ public class NetworkInteractionController {
 		
 	}
 	/**
-	 * Activate the listenning of the presence message
+	 * Activate the listening of the presence message
 	 */
 	public void rcvpresencemessage (){
 		this.msgrcptmanager = new UserPresenceRcvManager(this);
 		this.msgrcptmanager.start();
 	}
 	
+	/**
+	 * Activate the listening of the normal message
+	 */
 	public void receivemessage(){
 		this.rcvmsgmanager = new ReceiveMessageManager(this);
 		this.rcvmsgmanager.start();
 	}
 	
-	public void sendmessage(User user, Message msg)
+	/**
+	 * Send the a new message via the sendmessage class. @SendMessage
+	 * @param user : User; Target of the message
+	 * @param msg : Message, Content of the messgae;
+	 */
+	public void sendmessage(ArrayList<User> user, Message msg)
 	{
+		
 		this.sendmessage = new SendMessage(user, msg, this);
 		this.sendmessage.send();
 		
 	}
 	
+	/**
+	 * Handle a new presence message coming
+	 * @param msg : MessageUser;
+	 */
 	public void userpresenceevent(MessageUser msg){
 		User user = new User(msg.getPseudo(), msg.getIP(), msg.getPort(), msg.getEtat());
+		
+//		//DEBUG
+//		System.out.println("NEW USER INCOMING : " + user);
+		
 		if (msg.getEtat() == typeConnect.CONNECTED || msg.getEtat() ==null ){
 			
 			this.Userlist.adduser(user);
@@ -169,8 +187,16 @@ public class NetworkInteractionController {
 		} catch (InterruptedException e) {
 			Thread.currentThread().interrupt();
 		}
-		System.exit(0);
+		this.presencemanager.interrupt();
 
+	}
+	
+	/**
+	 * Function to quit the system
+	 */
+	public void quit(){
+		disconnect();
+		System.exit(0);
 	}
 	
 	

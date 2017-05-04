@@ -1,14 +1,15 @@
 package ihm;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import javax.swing.JFileChooser;
 
-import message.Message;
 import Network.NetworkInteractionController;
 import core.LocalUser;
 import core.User;
 import core.UserListModel;
+import message.Message;
 
 public class ControllerIHM{
 	
@@ -84,11 +85,11 @@ public class ControllerIHM{
 	 * @param user : User; target of the message. 
 	 * @param text2send : String; Text to send;
 	 */
-	public void actionsend(User user, String text2send){
+	public void actionsend(ArrayList<User> targets, String text2send){
 		Message msg = new Message();
 		msg.setData(text2send);
 		msg.setTypeData(text2send);
-		this.netcontroller.sendmessage(user, msg);
+		this.netcontroller.sendmessage(targets, msg);
 	}
 	
 	
@@ -97,17 +98,35 @@ public class ControllerIHM{
 	 * @param user : User; target of the message. 
 	 * @param path : String; Path of the file to send;
 	 */
-	public void actionsendfile(User user, String path){
+	public void actionsendfile(ArrayList<User> targets, String path){
 		Message msg = new Message();
 		File file2send = new File(path);
 		msg.setFile(file2send);
 		msg.setTypeData(file2send);
-		this.netcontroller.sendmessage(user, msg);
+		this.netcontroller.sendmessage(targets, msg);
 		
 	}
 	
+	
+	/**
+	 * Disconnect action send to the netcontroller
+	 */
 	public void actiondisconnect(){
 		this.netcontroller.disconnect();
 	}
 	
+	/**
+	 * Disconnect action send to the netcontroller
+	 */
+	public void actionconnect(){
+		LocalUser.getInstance().setConnected();
+		this.netcontroller.sendpresencemessage();
+	}
+	
+	/**
+	 * Quit action send to the netcontroller
+	 */
+	public void actionquit(){
+		this.netcontroller.quit();
+	}
 }
