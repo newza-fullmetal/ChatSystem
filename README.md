@@ -1,43 +1,43 @@
 # ChatSystem
 Chat system created for a course at INSA Toulouse.
-Tuteur : 
+Tuteur : Ulrich Matchi Aivodji 
 
-Binôme : 
+BinÃ´me : 
 Julien Coustillas
 Alvarro Pascual Legido
 
 Version Java : 8 
 
-Executer avec la classe launcher. Possible erreure de la classe Message implémenté deux foix : ignorer (garder celle dans le package message).  
-Un jarfile exécutable est aussi présent dans le dossier du projet.
+Executer avec la classe launcher. Possible erreure de la classe Message implÃ©mentÃ© deux foix : ignorer (garder celle dans le package message).  
+Un jarfile exÃ©cutable est aussi prÃ©sent dans le dossier du projet.
 
-Fonctionnalités implémentées : 
+FonctionnalitÃ©s implÃ©mentÃ©es : 
 -Connexion avec un ID. 
--Ecoute du réseau pour la présence d'autres users sur adresse Multicast
--Envoi de messages de présences sur adresse Multicast
--Réception de message TCP
+-Ecoute du rÃ©seau pour la prÃ©sence d'autres users sur adresse Multicast
+-Envoi de messages de prÃ©sences sur adresse Multicast
+-RÃ©ception de message TCP
 -Envoi de message TCP (testable en local via le localUser)
 -Envoi de fichier via TCP
--Envoi à plusieurs destinataires 
--déconnexion 
+-Envoi Ã  plusieurs destinataires 
+-dÃ©connexion 
 -interface graphique
 	-JList avec pattern Observer (actualisation automatique)
 	-TextArea
 	-Bouton d'actions
-	-sélection de fichier 
+	-sÃ©lection de fichier 
 	
 
-Fonctionnalités non implémentées : 
--renommer le user local (facile mais oublié)
+FonctionnalitÃ©s non implÃ©mentÃ©es : 
+-renommer le user local (facile mais oubliÃ©)
 -affichage des messages suivant le pattern Observer
 -Autoscale des objets graphiques
--choix de destination de sauvegarde des fichiers (dédault : mydocs)
--lancer deux fois l'application sur la même machine (problème avec le port mais erreur signalée)
+-choix de destination de sauvegarde des fichiers (dÃ©dault : mydocs)
+-lancer deux fois l'application sur la mÃªme machine (problÃ¨me avec le port mais erreur signalÃ©e)
 
-Dans la suite : nous présentons les résultats des tests JUnit des classes UserListmodel et NetworkInteractionController qui sont capitales et qui à elles seules font fonctionner tout le projet.
-Nous n'avons pas implémenté JUnit en même temps que nous concevions le projet c'est pourquoi ces tests ne sont pas très variés. 
+Dans la suite : nous prÃ©sentons les rÃ©sultats des tests JUnit des classes UserListmodel et NetworkInteractionController qui sont capitales et qui Ã  elles seules font fonctionner tout le projet.
+Nous n'avons pas implÃ©mentÃ© JUnit en mÃªme temps que nous concevions le projet c'est pourquoi ces tests ne sont pas trÃ¨s variÃ©s. 
 
-Nous n'avons pas pu implémenté tests de groupes. 
+Nous n'avons pas pu implÃ©mentÃ© les tests de groupes. 
 
 ------------------------
 Tests Sur la classe UserListModel
@@ -88,7 +88,7 @@ NEW COME : user2
 ------------------------
 Test de retour de listes
 ------------------------
-ça plante, je sais pas pourquoi ! 
+Ã§a plante, je sais pas pourquoi ! 
 [user1   CONNECTED, user2   CONNECTED]
 [user1   CONNECTED, user2   CONNECTED] listes identiques
 
@@ -97,13 +97,13 @@ Test de retour de listes
 Tests Sur la classe NetworkInteractionController
 ------------------------
 ------------------------
-Test de déconnexion
+Test de dÃ©connexion
 ------------------------
 Thread presence start !
 Test OK !
 Connected to Multicast group
 ------------------------
-Test réception de message de présence
+Test rÃ©ception de message de prÃ©sence
 ------------------------
 Thread reception Start
 Thread presence start !
@@ -112,18 +112,18 @@ NEW COME : localuser
 [localuser   CONNECTED]
 Test OK !
 ------------------------
-Test activation de deux messages de présence
+Test activation de deux messages de prÃ©sence
 ------------------------
 Thread presence start !
 [localuser   CONNECTED]
 Test OK !
 ------------------------
-Test message de présence utilisateur null
+Test message de prÃ©sence utilisateur null
 ------------------------
 Thread reception Start
 Test OK !
 ------------------------
-Test message de déconnexion
+Test message de dÃ©connexion
 ------------------------
 Test OK !
 ------------------------	
@@ -136,6 +136,6 @@ Test envoie de message null
 ------------------------
 Test OK !
 ------------------------
-Test envoie de 100 messages coucou différents
+Test envoie de 100 messages coucou diffÃ©rents
 ------------------------
 Test OK !
