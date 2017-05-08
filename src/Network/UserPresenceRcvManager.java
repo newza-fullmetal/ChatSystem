@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
 import user.MessageUser;
 
 /**
- * Manager to receive the different message;
+ * Manager to receive the different messages;
  * @author coustill
  *
  */
@@ -23,10 +23,13 @@ public class UserPresenceRcvManager extends Thread{
 		this.controller = control;
 	}
 	
+	/**
+	 * Thread interrupted on the order of the Controller 
+	 */
 	public void run(){
 		System.out.println("Thread reception Start");
 		while (!Thread.currentThread().isInterrupted()) {
-			byte[] recvBuf = new byte[5000];
+			byte[] recvBuf = new byte[5000]; 
 		    DatagramPacket packet = new DatagramPacket(recvBuf, recvBuf.length);
 		    try{
 		    	this.controller.G_MultiSocket.receive(packet);

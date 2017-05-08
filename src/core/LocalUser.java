@@ -16,10 +16,7 @@ public class LocalUser extends User {
 	 */
 	private LocalUser(InetAddress IP, int port) 
 	{super(IP, port);}
-	
-//	public LocalUser(String pseudo, InetAddress IP, int port, typeConnect etat) {
-//		super(pseudo, IP, port, etat);
-//	}
+
 	
 	
 	
@@ -30,7 +27,7 @@ public class LocalUser extends User {
 		private final static LocalUser instance = new LocalUser(getlocaladdress(), 2345);
 	}
 	
-	/** Point d'accÃ¨s pour l'instance unique du singleton */
+	/** Point d'accés pour l'instance unique du singleton */
 	public static LocalUser getInstance()
 	{	return LocalUserHolder.instance;
 	}

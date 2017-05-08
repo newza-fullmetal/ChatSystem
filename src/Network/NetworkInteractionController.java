@@ -111,13 +111,15 @@ public class NetworkInteractionController {
 	/**
 	 * Send the a new message via the sendmessage class. @SendMessage
 	 * @param user : User; Target of the message
-	 * @param msg : Message, Content of the messgae;
+	 * @param msg : Message, Content of the message;
 	 */
 	public void sendmessage(ArrayList<User> user, Message msg)
 	{
+		if (msg != null){
+			this.sendmessage = new SendMessage(user, msg, this);
+			this.sendmessage.send();
+		}
 		
-		this.sendmessage = new SendMessage(user, msg, this);
-		this.sendmessage.send();
 		
 	}
 	
@@ -130,15 +132,17 @@ public class NetworkInteractionController {
 		
 //		//DEBUG
 //		System.out.println("NEW USER INCOMING : " + user);
+		if (user.getPseudo() != null) {
+			if (msg.getEtat() == typeConnect.CONNECTED || msg.getEtat() ==null ){
+				
+				this.Userlist.adduser(user);
+			}
+			else { // IF Deconnected
+				
+				this.Userlist.removeuser(user);
+			}
+		}
 		
-		if (msg.getEtat() == typeConnect.CONNECTED || msg.getEtat() ==null ){
-			
-			this.Userlist.adduser(user);
-		}
-		else {
-			
-			this.Userlist.removeuser(user);
-		}
 	}
 	
 	/**

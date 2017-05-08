@@ -12,6 +12,9 @@ public class UserListModel {
 	private HashMap<String,User> userlist = new HashMap<String,User>();
 	private DefaultListModel<User> listmodeluser = new DefaultListModel<User>();
 	
+	/**
+	 * Deprecated 
+	 */
 //	private void updateevent(ListDataEvent ev){ 
 //		for (ListDataListener l : this.listlistener){
 //			l.contentsChanged(ev);
@@ -27,20 +30,22 @@ public class UserListModel {
 	public void adduser(User user){
 		
 		boolean alreadyexist =false;
-		
-		
-			if(this.userlist.containsKey(user.getPseudo())){
-				alreadyexist = true;
+		if (user != null){
+			if(!this.userlist.isEmpty()){
+				if(this.userlist.containsKey(user.getPseudo())){
+					alreadyexist = true;
+				}
 			}
-		
-		if (!alreadyexist){
-			System.out.println("NEW COME : " + user.getPseudo());
-			this.userlist.put(user.getPseudo(),user);
-			this.listmodeluser.addElement(user);
-			System.out.println(this.listmodeluser);
-//			//DEBUG
-//			System.out.println("Table des users : " + this.listmodeluser);
 			
+			if (!alreadyexist){
+				System.out.println("NEW COME : " + user.getPseudo());
+				this.userlist.put(user.getPseudo(),user);
+				this.listmodeluser.addElement(user);
+				System.out.println(this.listmodeluser);
+	//			//DEBUG
+	//			System.out.println("Table des users : " + this.listmodeluser);
+				
+			}
 		}
 		
 	}
@@ -52,23 +57,33 @@ public class UserListModel {
 	 * @param user : User; @see user
 	 */
 	public void removeuser(User user){
-		if (this.userlist.containsKey(user.getPseudo())){
-				User olduser = this.userlist.get(user.getPseudo());
-				System.out.println("NEW LEAVE : " + olduser.getPseudo());
-				this.userlist.remove(olduser.getPseudo(), olduser);
-				this.listmodeluser.removeElement(olduser);
-//				//DEBUG
-//				System.out.println("Table des users : " + this.userlist);
-				
-			}
+		if (user != null){
+			
+			if (!this.userlist.isEmpty() && this.userlist.containsKey(user.getPseudo())){
+					User olduser = this.userlist.get(user.getPseudo());
+					System.out.println("NEW LEAVE : " + olduser.getPseudo());
+					this.userlist.remove(olduser.getPseudo(), olduser);
+					this.listmodeluser.removeElement(olduser);
+	//				//DEBUG
+	//				System.out.println("Table des users : " + this.userlist);
+					
+				}
+		}
 		
 	}
 	
-	
+	/**
+	 * Return the listmodel to allow other object to listen
+	 * @return listmodeluser : DefaultListModel;
+	 */
 	public DefaultListModel<User> getlistmodel(){
 		return this.listmodeluser;
 	}
 	
+	/**
+	 * Return the Hasmap containing all the users 
+	 * @return userlist : Hashmap;
+	 */
 	public HashMap<String,User> getuserlist(){
 		return this.userlist;
 	}

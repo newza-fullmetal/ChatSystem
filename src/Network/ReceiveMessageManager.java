@@ -11,6 +11,11 @@ import javax.swing.JOptionPane;
 import message.Message;
 import core.LocalUser;
 
+/**
+ * Thread created to receive any new message in TCP
+ * @author Julien Coustillas
+ *
+ */
 public class ReceiveMessageManager extends Thread{
 	
 	private NetworkInteractionController controller;
@@ -19,6 +24,9 @@ public class ReceiveMessageManager extends Thread{
 		this.controller = control;
 	}
 	
+	/**
+	 * This thread can be stopped on the order of the Controller . 
+	 */
 	public void run(){
 		System.out.println("Thread receptionMessage Start");
 		while (!Thread.currentThread().isInterrupted()) {
@@ -34,6 +42,7 @@ public class ReceiveMessageManager extends Thread{
 				if (socketduserveur.getInetAddress() != null) {
 					this.controller.Newincomingmessage(msg, socketduserveur.getInetAddress());
 				}
+				//DEBUG
 				 System.out.println("New incoming message :" + ((msg.getData()==null)?"C'est un fichier":msg.getData())); // null if file
 				 socketserver.close();
 	             socketduserveur.close();

@@ -30,25 +30,26 @@ public class SendMessage {
 		ObjectOutputStream oos;
 		OutputStream os;
 		Socket socket; 
+		if (this.targets != null ){
 		try {
-			for (User user : this.targets){
-				socket = new Socket(user.getIP(), user.getPort());
-				os = socket.getOutputStream();
-				oos = new ObjectOutputStream(os);
-				oos.writeObject(this.datatosend);
-				oos.flush();
-				oos.close();
-				socket.close();
-				System.out.println("Envoie de message vers : " + user.getIP() + user.getPort() + "\n" +
-									"Contenu :" + this.datatosend);
+				for (User user : this.targets){
+					socket = new Socket(user.getIP(), user.getPort());
+					os = socket.getOutputStream();
+					oos = new ObjectOutputStream(os);
+					oos.writeObject(this.datatosend);
+					oos.flush();
+					oos.close();
+					socket.close();
+					System.out.println("Envoie de message vers : " + user.getIP() + user.getPort() + "\n" +
+										"Contenu :" + this.datatosend);
+				}
+			
+	
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-		
-
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
-		
 	}
 	
 }
